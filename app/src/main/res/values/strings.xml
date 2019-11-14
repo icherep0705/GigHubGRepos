@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">GigHubGRepos</string>
+    <string name="google_repos">Google Repos</string>
+    <string name="issues_count">Issues count:</string>
+    <string name="open">Open:</string>
+    <string name="closed">Closed</string>
+    <string name="open_">Open</string>
+    <string name="issue_status">Issue status:</string>
+</resources>

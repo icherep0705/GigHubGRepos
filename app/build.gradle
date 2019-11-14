@@ -1,0 +1,58 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.cherepiv.gighubgrepos"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "androidx.core:core-ktx:$rootProject.ext.ktxVersion"
+//    testImplementation 'junit:junit:4.12'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation "androidx.appcompat:appcompat:$rootProject.appcompatVersion"
+    implementation "androidx.legacy:legacy-support-v4:$rootProject.legacyVersion"
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlin_version"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.ext.recyclerviewVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintlayoutVersion"
+    implementation "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.okhttpVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.gsonVersion"
+//    //recyclerView
+//    implementation 'com.android.support:cardview-v7:27.1.1'
+//    //butterKnife
+//    implementation 'com.jakewharton:butterknife:8.8.1'
+//    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+//    implementation 'com.android.support:design:27.1.1'
+//    //picasso
+//    implementation 'com.squareup.picasso:picasso:2.71828'
+//    //dagger2
+//    implementation 'com.google.dagger:dagger:2.10'
+//    annotationProcessor 'com.google.dagger:dagger-compiler:2.10'
+//    implementation 'com.google.dagger:dagger-android:2.10'
+//    annotationProcessor 'com.google.dagger:dagger-android-processor:2.10'
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+}
