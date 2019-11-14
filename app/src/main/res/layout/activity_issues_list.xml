@@ -29,12 +29,20 @@
             android:layout_height="wrap_content" >
 
             <RadioButton
+                android:layout_weight="1"
+                android:checked="true"
+                android:id="@+id/issues_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/all" />
+
+            <RadioButton
                 android:id="@+id/issues_open"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/open_"
-                android:checked="true" />
+                android:checked="false" />
 
             <RadioButton
                 android:layout_weight="1"
@@ -53,16 +61,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
         android:layout_height="3dp"
-        android:background="#000000"/>
+        android:background="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/issues_container"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="124dp"
         android:id="@+id/issues_container"
-        app:layout_constraintTop_toBottomOf="@+id/divider"
+        app:layout_constraintTop_toTopOf="@+id/divider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

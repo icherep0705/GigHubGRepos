@@ -1,8 +1,7 @@
 package com.cherepiv.gighubgrepos.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,24 +27,28 @@ class MainActivity : AppCompatActivity() {
 
         RetrofitInstance.apiClient.getRepos(1, 100).enqueue(object : Callback<List<GRepo>>{
             override fun onFailure(call: Call<List<GRepo>>, t: Throwable) {
-                //TODO retry logic
-
-                Log.d(TAG, t.message)
+                //TODO error/retry
+                t.printStackTrace()
             }
 
             override fun onResponse(call: Call<List<GRepo>>, response: Response<List<GRepo>>) {
-                Log.d(TAG, response.body()?.size.toString())
-                response.body()?.let { initRecycler(it) }
+                if (response.isSuccessful)
+                    response.body()?.let { initRecycler(it) }
+                else {
+                    //TODO error/retry
+                }
             }
         })
     }
 
     private fun initRecycler(repos: List<GRepo>){
-        reposContainer?.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            setHasFixedSize(true)
-            addItemDecoration(DividerItemDecoration(this@MainActivity, RecyclerView.VERTICAL))
-            adapter = GReposAdapter(repos)
+        reposContainer?.let {
+            it.layoutManager = LinearLayoutManager(this@MainActivity)
+            it.setHasFixedSize(true)
+            it.addItemDecoration(DividerItemDecoration(this@MainActivity, RecyclerView.VERTICAL))
+            val reposAdapter = GReposAdapter()
+            reposAdapter.repos = repos
+            it.adapter = reposAdapter
         }
     }
 }

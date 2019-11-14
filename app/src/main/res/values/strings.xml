@@ -6,4 +6,6 @@
     <string name="closed">Closed</string>
     <string name="open_">Open</string>
     <string name="issue_status">Issue status:</string>
+    <string name="state">State</string>
+    <string name="all">All</string>
 </resources>

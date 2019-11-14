@@ -3,64 +3,42 @@ package com.cherepiv.gighubgrepos.view.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.cherepiv.gighubgrepos.R
 import com.cherepiv.gighubgrepos.model.GRepoIssue
 
-class GRepoIssuesAdapter(repos: List<GRepoIssue>): RecyclerView.Adapter<GRepoIssuesAdapter.GReposVH>() {
+class GRepoIssuesAdapter: RecyclerView.Adapter<GRepoIssuesAdapter.GReposVH>() {
 
-    private var repos: List<GRepoIssue> = repos
+    var repos: List<GRepoIssue>? = null
 
-    override fun getItemCount() = repos.size
+    override fun getItemCount() = if(repos?.size == null) 0 else repos?.size!!
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = GReposVH(LayoutInflater.from(parent.context).inflate(R.layout.grepo_view_item, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = GReposVH(LayoutInflater.from(parent.context).inflate(R.layout.grepo_issues_view_item, parent, false))
 
     override fun onBindViewHolder(holder: GReposVH, position: Int) {
-        holder.bindView(repos[position])
+        repos?.get(position)?.let { holder.bindView(it) }
     }
 
+    class GReposVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    class GReposVH(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
-//
-//        val repoId: TextView? = itemView.findViewById(R.id.repo_id)
-//        val repoDescription: TextView? = itemView.findViewById(R.id.repo_description)
-//        val repoUrl: TextView? = itemView.findViewById(R.id.repo_url)
-//        val repoIssuesCount: TextView? = itemView.findViewById(R.id.repo_issues_count)
-//        val repoStatusOne: ImageView? = itemView.findViewById(R.id.repo_status_1)
-//        val repoStatusTwo: ImageView? = itemView.findViewById(R.id.repo_status_2)
-//        val repoStatusThree: ImageView? = itemView.findViewById(R.id.repo_status_3)
-//        val repoStatusFour: ImageView? = itemView.findViewById(R.id.repo_status_4)
+        private val repoId: TextView? = itemView.findViewById(R.id.repo_id)
+        private val repoTitle: TextView? = itemView.findViewById(R.id.repo_title)
+        private val repoState: TextView? = itemView.findViewById(R.id.repo_state)
+        private val repoBody: TextView? = itemView.findViewById(R.id.repo_body)
 
-        init {
-            itemView.setOnClickListener(this)
-        }
         fun bindView(repo: GRepoIssue) {
-
-//            repo.id?.let { repoId?.text = it.toString() }
-//            repo.description?.let { repoDescription?.text = it }
-//            repo.url?.let { repoUrl?.text = it.toString() }
-//            repo.openIssuesCount?.let { repoIssuesCount?.text = it.toString() }
-//
-//            repo.disabled?.let {
-//                if (!it) {
-//                    repoStatusOne?.setImageResource(R.drawable.status_enable)
-//                    repoStatusTwo?.setImageResource(R.drawable.status_enable)
-//                    repoStatusThree?.setImageResource(R.drawable.status_enable)
-//                    repoStatusFour?.setImageResource(R.drawable.status_enable)
-//                } else {
-//                    repoStatusOne?.setImageResource(R.drawable.status_disable)
-//                    repoStatusTwo?.setImageResource(R.drawable.status_disable)
-//                    repoStatusThree?.setImageResource(R.drawable.status_disable)
-//                    repoStatusFour?.setImageResource(R.drawable.status_disable)
-//                }
-//
-//            }
-        }
-
-        override fun onClick(v: View?) {
-//            Intent(v?.context, IssuesListActivity::class.java).apply {
-//                v?.context?.startActivity(this)
-//            }
+            repo.id?.let { repoId?.text = it.toString() }
+            repo.title?.let { repoTitle?.text = it }
+            repo.state?.let {
+                when (it) {
+                    "open" -> {repoState?.setTextColor(ContextCompat.getColor(itemView.context, R.color.red))}
+                    "close" -> {repoState?.setTextColor(ContextCompat.getColor(itemView.context, R.color.green))}
+                }
+                repoState?.text = it
+            }
+            repo.body?.let { repoBody?.text = it }
         }
     }
 }
