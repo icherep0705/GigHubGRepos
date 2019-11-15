@@ -4,32 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.IssuesListActivity"
-    android:layout_margin="16dp">
+    tools:context="com.cherepiv.githubgrepos.view.IssuesListActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:src="@drawable/bg"
+        android:alpha=".3"
+        android:scaleType="fitXY"
+        android:layout_height="match_parent"
+        android:background="#B9FFFFFF"/>
+
+    <LinearLayout
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/radio_group_container"
+        android:background="#B9FFFFFF"
+        android:gravity="center"
+        android:paddingBottom="16dp">
 
         <TextView
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/RegularFontStyle"
             android:text="@string/issue_status"
-            android:layout_marginStart="16dp"
             android:id="@+id/status_label"
-            app:layout_constraintBottom_toBottomOf="@+id/radio_group"
-            android:layout_marginEnd="8dp"/>
+            android:layout_marginEnd="64dp"/>
 
         <RadioGroup
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp"
+            android:paddingBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="64dp"
             android:id="@+id/radio_group"
-            android:layout_weight="3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" >
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <RadioButton
-                android:layout_weight="1"
                 android:checked="true"
                 android:id="@+id/issues_all"
                 android:layout_width="wrap_content"
@@ -38,14 +50,12 @@
 
             <RadioButton
                 android:id="@+id/issues_open"
-                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/open_"
                 android:checked="false" />
 
             <RadioButton
-                android:layout_weight="1"
                 android:id="@+id/issues_closed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,10 +63,11 @@
 
         </RadioGroup>
 
+    </LinearLayout>
+
     <View
         android:id="@+id/divider"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/radio_group"
+        app:layout_constraintTop_toBottomOf="@+id/radio_group_container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
@@ -66,7 +77,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="144dp"
         android:id="@+id/issues_container"
         app:layout_constraintTop_toTopOf="@+id/divider"
         app:layout_constraintStart_toStartOf="parent"

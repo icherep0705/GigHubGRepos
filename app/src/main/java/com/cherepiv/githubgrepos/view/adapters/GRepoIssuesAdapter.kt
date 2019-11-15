@@ -1,24 +1,21 @@
-package com.cherepiv.gighubgrepos.view.adapters
+package com.cherepiv.githubgrepos.view.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cherepiv.gighubgrepos.R
-import com.cherepiv.gighubgrepos.model.GRepoIssue
+import com.cherepiv.githubgrepos.model.datamodels.GRepoIssue
 
-class GRepoIssuesAdapter: RecyclerView.Adapter<GRepoIssuesAdapter.GReposVH>() {
-
-    var repos: List<GRepoIssue>? = null
-
-    override fun getItemCount() = if(repos?.size == null) 0 else repos?.size!!
+class GRepoIssuesAdapter: PagedListAdapter<GRepoIssue, GRepoIssuesAdapter.GReposVH>(GRepoIssue.DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = GReposVH(LayoutInflater.from(parent.context).inflate(R.layout.grepo_issues_view_item, parent, false))
 
     override fun onBindViewHolder(holder: GReposVH, position: Int) {
-        repos?.get(position)?.let { holder.bindView(it) }
+        getItem(position)?.let { holder.bindView(it) }
     }
 
     class GReposVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
