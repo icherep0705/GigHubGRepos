@@ -34,7 +34,8 @@ class MainActivity : AppCompatActivity() {
             reposAdapter.submitList(it)
             recyclerView?.adapter = reposAdapter
             reposAdapter.notifyDataSetChanged()
-            Handler().postDelayed({ progressBar?.visibility = View.GONE }, 2000)
+            //TODO set observable to listen when data is ready...hide progress
+            Handler().postDelayed({ progressBar?.visibility = View.GONE }, 1000)
         })
     }
 
